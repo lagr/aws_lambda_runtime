@@ -1,0 +1,12 @@
+name: aws_lambda_runtime
+version: 0.1.0
+
+authors:
+  - Lars Greiving <greiving@pm.me>
+
+description: |
+  Crystal runtime for AWS Lambda
+
+crystal: 0.35.1
+
+license: MIT
