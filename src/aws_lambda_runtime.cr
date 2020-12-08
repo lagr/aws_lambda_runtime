@@ -1,4 +1,5 @@
 require "./aws_lambda_runtime/*"
+require "json"
 
 # Ensure that logs are flushed immediately.
 STDOUT.sync = true
@@ -6,7 +7,19 @@ STDOUT.sync = true
 module AwsLambdaRuntime
   VERSION = "0.1.0"
 
-  def self.run(&block : (String, Invocation) -> T) forall T
+  def self.run(&block : (JSON::Any, Invocation) -> T) forall T
+    self.listen(&->(event : String, invocation : Invocation) { block.call(JSON.parse(event), invocation) })
+  end
+
+  def self.run(handler : Proc(JSON::Any, Invocation, Object))
+    self.listen(&->(event : String, invocation : Invocation) { handler.call(JSON.parse(event), invocation) })
+  end
+
+  def self.run(handler : Proc(String, Invocation, Object))
+    self.listen(&handler)
+  end
+
+  def self.listen(&block : (String, Invocation) -> T) forall T
     client = Client.new
 
     loop do
