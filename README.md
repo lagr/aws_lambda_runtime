@@ -2,6 +2,12 @@
 
 An AWS Lambda runtime for crystal.
 
+---
+
+**While this is a working implementation, it is not tested yet and the API is likely subject to change.** Feel free to give it a try, nonetheless!
+
+---
+
 ## Installation
 
 1. Add the dependency to your `shard.yml`:
