@@ -21,6 +21,8 @@ module AwsLambdaRuntime
     end
 
     def send_response(aws_request_id, response_data)
+      raise "Cannot serialize response" unless response_data.responds_to?(:to_json)
+
       response = @client.post(INVOCATION_RESPONSE_PATH % aws_request_id, body: response_data.to_json)
       raise "Sending result failed: #{response.status_code}" unless response.success?
     end
