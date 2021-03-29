@@ -5,17 +5,17 @@ require "json"
 STDOUT.sync = true
 
 module AwsLambdaRuntime
-  VERSION = "0.1.0"
+  VERSION = "0.2.0"
 
   def self.run(&block : (JSON::Any, Invocation) -> T) forall T
     self.listen(&->(event : String, invocation : Invocation) { block.call(JSON.parse(event), invocation) })
   end
 
-  def self.run(handler : Proc(JSON::Any, Invocation, Object))
+  def self.run(handler : Proc(JSON::Any, Invocation, _))
     self.listen(&->(event : String, invocation : Invocation) { handler.call(JSON.parse(event), invocation) })
   end
 
-  def self.run(handler : Proc(String, Invocation, Object))
+  def self.run(handler : Proc(String, Invocation, _))
     self.listen(&handler)
   end
 
