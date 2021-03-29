@@ -34,6 +34,7 @@ module AwsLambdaRuntime
         body: {
           errorMessage: exception.message,
           errorType:    exception.class.to_s,
+          stacktrace: exception.backtrace.first(100)
         }.to_json
       )
     end
