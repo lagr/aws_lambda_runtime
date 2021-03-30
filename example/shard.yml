@@ -1,0 +1,13 @@
+name: example
+version: 1.0
+
+executables:
+  - bootstrap
+
+targets:
+  bootstrap:
+    main: function.cr
+
+dependencies:
+  aws_lambda_runtime:
+    github: lagr/aws_lambda_runtime

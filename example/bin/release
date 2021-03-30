@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -eu
+
+# This script assumes is invoked from project root with
+# $TAG_NAME  (e.g. 'example-image')
+# $REPOSITORY_URL (e.g. 749265843722.dkr.ecr.eu-central-1.amazonaws.com)
+# and aws credentials environment variables
+
+docker build . -t $TAG_NAME
+docker tag $TAG_NAME:latest $REPOSITORY_URL/$TAG_NAME:latest
+docker push $REPOSITORY_URL/$TAG_NAME:latest
