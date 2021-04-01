@@ -2,6 +2,7 @@ require "http/client"
 require "json"
 
 module AwsLambdaRuntime
+  # :nodoc:
   class Client
     NEXT_INVOCATION_PATH      = "/2018-06-01/runtime/invocation/next"
     INVOCATION_RESPONSE_PATH  = "/2018-06-01/runtime/invocation/%s/response"

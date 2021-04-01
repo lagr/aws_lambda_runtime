@@ -1,4 +1,5 @@
 module AwsLambdaRuntime
+  # Provides meta information on the lambda.
   struct LambdaContext
     getter function_name : String
     getter function_version : String

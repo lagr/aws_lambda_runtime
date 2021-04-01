@@ -49,13 +49,13 @@ def handler(event, invocation)
   # do your thing
 
   puts "event is a #{event.class.name}."
-  # => event is a String.
+  # => event is a JSON::Any.
 
   # return something that responds to to_json
   { "serialize-this": "my friend" }
 end
 
-AwsLambdaRuntime.run(->handler(String, AwsLambdaRuntime::Invocation))
+AwsLambdaRuntime.run(->handler(JSON::Any, AwsLambdaRuntime::Invocation))
 ```
 
 Working on the raw `String` can be handy to define custom mappings for the expected event data or to defer parsing to a later point in time:

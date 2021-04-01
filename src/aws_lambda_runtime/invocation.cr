@@ -1,4 +1,5 @@
 module AwsLambdaRuntime
+  # `Invocation` provides the event payload, the context and meta information of a lambda invocation.
   struct Invocation
     getter aws_request_id : String
     getter client_context : JSON::Any
@@ -25,8 +26,8 @@ module AwsLambdaRuntime
       @trace_id = headers.fetch("Lambda-Runtime-Trace-Id", "")
     end
 
+    # FIXME: not correct, deadline ms is a date
     def get_remaining_time_in_millis
-      # TODO not correct, deadline ms is a date
       elapsed_time = Time.monotonic - @start_time
       remaining_time = @deadline_ms - elapsed_time
       remaining_time.positive? ? remaining_time.total_milliseconds : 0
