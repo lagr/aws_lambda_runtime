@@ -1,4 +1,4 @@
-# Example project
+# Example project for provisioning via a Docker image
 
 ## Prerequisites
 - You'll need an (ECR) container repository

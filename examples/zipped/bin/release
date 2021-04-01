@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -eu
+
+# This script assumes is invoked from project root with
+# $LAMBDA_ARN (e.g. arn:aws:lambda:eu-central-1:749265843722:function:crystal-zipped-test)
+# and aws credentials/region environment variables
+
+rm -rf ./out
+DOCKER_BUILDKIT=1 docker build --file Dockerfile --output out .
+zip -jyr ./out/lambda.zip ./out/*
+
+aws lambda update-function-code \
+  --function-name $LAMBDA_ARN \
+  --zip-file fileb://./out/lambda.zip
