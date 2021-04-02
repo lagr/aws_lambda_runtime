@@ -2,7 +2,7 @@ FROM crystallang/crystal:latest AS build-env
 ADD ./src /build
 ADD ./shard.yml /build/shard.yml
 WORKDIR /build
-RUN shards build -s
+RUN shards build --no-debug --release
 RUN ldd bin/bootstrap | \
     tr -s '[:blank:]' '\n' | \
     grep '^/' | \
